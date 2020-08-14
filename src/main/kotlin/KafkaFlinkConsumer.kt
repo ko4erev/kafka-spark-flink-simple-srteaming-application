@@ -3,7 +3,7 @@ import org.apache.flink.api.common.serialization.SimpleStringSchema
 import org.apache.flink.api.java.tuple.Tuple2
 import org.apache.flink.streaming.api.datastream.DataStream
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer
 import org.apache.flink.util.Collector
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import java.util.*
@@ -17,7 +17,7 @@ import java.util.*
         val props = Properties()
         props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = Commons.EXAMPLE_KAFKA_SERVER
         props[ConsumerConfig.GROUP_ID_CONFIG] = "FlinkConsumerGroup"
-        val messageStream: DataStream<String> = env.addSource(FlinkKafkaConsumer010(Commons.EXAMPLE_KAFKA_TOPIC, SimpleStringSchema(), props))
+        val messageStream: DataStream<String> = env.addSource(FlinkKafkaConsumer(Commons.EXAMPLE_KAFKA_TOPIC, SimpleStringSchema(), props))
 
 
         // Split up the lines in pairs (2-tuples) containing: (word,1)

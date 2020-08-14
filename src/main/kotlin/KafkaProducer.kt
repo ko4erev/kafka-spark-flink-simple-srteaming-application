@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException
         val ran = Random(System.currentTimeMillis())
         val producer = createProducer()
         val EXAMPLE_PRODUCER_INTERVAL = if (System.getenv("EXAMPLE_PRODUCER_INTERVAL") != null)
-            System.getenv("EXAMPLE_PRODUCER_INTERVAL").toInt() else 100
+            System.getenv("EXAMPLE_PRODUCER_INTERVAL").toInt() else 1000
         try {
             while (true) {
                 val word = words[ran.nextInt(words.size)]
