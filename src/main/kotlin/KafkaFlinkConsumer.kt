@@ -1,5 +1,6 @@
 import org.apache.flink.api.common.functions.FlatMapFunction
 import org.apache.flink.api.common.serialization.SimpleStringSchema
+import org.apache.flink.api.java.functions.KeySelector
 import org.apache.flink.api.java.tuple.Tuple2
 import org.apache.flink.streaming.api.datastream.DataStream
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
@@ -22,7 +23,7 @@ import java.util.*
 
         // Split up the lines in pairs (2-tuples) containing: (word,1)
         messageStream.flatMap<Tuple2<String, Int>>(Tokenizer()) // group by the tuple field "0" and sum up tuple field "1"
-                .keyBy(0)
+                .keyBy(KeySelector<Tuple2<String, Int>, String> { message -> message.f0 })
                 .sum(1)
                 .print()
         try {
